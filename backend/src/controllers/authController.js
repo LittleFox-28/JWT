@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 let refreshTokens = []; // fake a database to save refreshToken, should use redis for this case.
-console.log(refreshTokens);
 
 const authController = {
   //Register
@@ -51,14 +50,14 @@ const authController = {
     try {
       const user = await User.findOne({ username: req.body.username });
       if (!user) {
-      return  res.status(404).json("Wrong User !??");
+        return res.status(404).json("Wrong User !??");
       }
       const validPassword = await bcrypt.compare(
         req.body.password,
         user.password
       );
       if (!validPassword) {
-      return  res.status(500).json("Wrong Password !??");
+        return res.status(500).json("Wrong Password !??");
       }
       if (user && validPassword) {
         const accessToken = authController.generateAccessToken(user);
@@ -86,7 +85,7 @@ const authController = {
     refreshTokens = refreshTokens.filter(
       (token) => token !== req.cookies.refreshToken
     );
-    res.status(200).json("logged out !")
+    res.status(200).json("logged out !");
   },
   requestRefreshToken: async (req, res) => {
     //Take refresh token from user
