@@ -24,8 +24,28 @@ const userSlice = createSlice({
       state.users.isFetching = false;
       state.users.error = true;
     },
+    //DELETE USERS
+    deleteUsersStart: (state) => {
+      state.users.isFetching = true;
+    },
+    deleteUsersSuccess: (state, action) => {
+      state.users.isFetching = false;
+      state.message = action.payload;
+    },
+    deleteUsersFailed: (state, action) => {
+      state.users.isFetching = false;
+      state.users.error = true;
+      state.message = action.payload;
+    },
   },
 });
 
-export const { getUsersStart, getUsersSuccess, getUsersFailed } = userSlice.actions;
+export const {
+  getUsersStart,
+  getUsersSuccess,
+  getUsersFailed,
+  deleteUsersStart,
+  deleteUsersSuccess,
+  deleteUsersFailed,
+} = userSlice.actions;
 export default userSlice.reducer;

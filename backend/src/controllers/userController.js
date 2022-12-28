@@ -11,10 +11,10 @@ const userController = {
   },
   deleteUser: async (req, res) => {
     try {
-      const user = await User.findByIdAndDelete(req.params.id);
-      res.status(200).json(user && "Delete Successfully!!!");
-    } catch (error) {
-      res.status(500).json(error);
+      await User.findById(req.params.id);
+      res.status(200).json("Delete Successfully!!!");
+    } catch {
+      return res.status(500).json("You're not allow to delete other");
     }
   },
 };
