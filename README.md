@@ -1,1 +1,1 @@
-# JWT
+# A registration form with JWT
